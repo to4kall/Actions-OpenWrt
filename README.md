@@ -2,6 +2,11 @@
 
 固件主要添加超多 无线网卡驱动为目的!
 
+目前开启usb网络共享驱动
+
+kmod-usb-net-cdc-ether kmod-usb-net-cdc-mbim kmod-usb-net-cdc-ncm kmod-usb-net-huawei-cdc-ncm kmod-usb-net-ipheth 
+kmod-usb-net-rndis
+
 目前开启的Realtek系列网卡
 
 kmod-rtw88-8812a
