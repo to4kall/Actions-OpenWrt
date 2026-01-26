@@ -13,7 +13,7 @@ on:
           - true
           - false
 env:
-  REPO_URL: https://github.com/immortalwrt/immortalwrt
+  REPO_URL: https://github.com/coolsnowwolf/lede
   CONFIG_FILE: 'config/JDC_AX1800PRO.config'
   REPO_BRANCH: master
   UPLOAD_BIN_DIR: true
