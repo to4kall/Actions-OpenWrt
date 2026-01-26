@@ -13,7 +13,7 @@ on:
           - true
           - false
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_URL: https://github.com/immortalwrt/immortalwrt
   CONFIG_FILE: 'config/JDC_AX1800PRO.config'
   REPO_BRANCH: master
   UPLOAD_BIN_DIR: true
@@ -27,7 +27,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Show hardware info
       run: |
@@ -84,12 +84,7 @@ jobs:
 
     - name: Configure build
       run: |
-        if [[ ! -f "${CONFIG_FILE}" ]]; then
-          echo "❌ Error: Config file ${CONFIG_FILE} not found!"
-          exit 1
-        fi
-        chmod +x ./scripts/customize.sh && ./scripts/customize.sh
-        [[ -d "files" ]] && mv -f files openwrt/files
+       
         cp -fv "${CONFIG_FILE}" openwrt/.config
         cd openwrt && make defconfig
         
