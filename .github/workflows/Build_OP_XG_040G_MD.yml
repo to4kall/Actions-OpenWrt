@@ -67,10 +67,10 @@ jobs:
         # cd openwrt
         # echo 'src-git modem https://github.com/FUjr/QModem.git;main' >> feeds.conf.default
         if [ -n "$GITHUB_OUTPUT" ]; then
-      echo "status=success" >> "$GITHUB_OUTPUT"
-      else
-      echo "::set-output name=status::success"
-      fi
+        echo "status=success" >> "$GITHUB_OUTPUT"
+        else
+        echo "::set-output name=status::success"
+        fi
 
     - name: Load custom feeds
       run: |
