@@ -53,7 +53,7 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         sudo -E apt-get -y update
-        sudo -E apt-get -y install $(curl -fsSL https://raw.githubusercontent.com/LeeHe-gif/depend_ubuntu2204_openwrt/main/depend_ubuntu2204_openwrt)
+        sudo -E apt-get -y install $(curl -fsSL https://raw.githubusercontent.com/xuxin1955/depend_ubuntu2204_openwrt/refs/heads/main/depend_ubuntu2204_openwrt)
         sudo timedatectl set-timezone "${TZ}"
         echo "status=success" >> ${GITHUB_OUTPUT}
         
@@ -63,22 +63,12 @@ jobs:
       if: steps.init.outputs.status == 'success' && success()
       run: |
         git clone --depth 1 "$REPO_URL" -b "$REPO_BRANCH" openwrt
-        git clone --depth 1 https://github.com/vernesong/OpenClash.git OpenClash
-        # cd openwrt
-        # echo 'src-git modem https://github.com/FUjr/QModem.git;main' >> feeds.conf.default
         if [ -n "$GITHUB_OUTPUT" ]; then
-        echo "status=success" >> "$GITHUB_OUTPUT"
-        else
-        echo "::set-output name=status::success"
-        fi
-
-    - name: Load custom feeds
-      run: |
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        chmod +x $DIY_P1_SH
-        cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P1_SH
-        
+      echo "status=success" >> "$GITHUB_OUTPUT"
+      else
+      echo "::set-output name=status::success"
+      fi
+       
     - name: Free up disk space
       run: |
         sudo mkdir -p /mnt/openwrt/{dl,staging_dir,build_dir}
@@ -92,9 +82,15 @@ jobs:
       working-directory: ./openwrt
       run: |
         ./scripts/feeds update -a
-        rm -rf feeds/luci/applications/luci-app-openclash
-        cp -r ../OpenClash/luci-app-openclash feeds/luci/applications/
+        
         ./scripts/feeds install -a -f
+        
+    - name: Load custom feeds
+      run: |
+        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
+        chmod +x $DIY_P1_SH
+        cd openwrt
+        $GITHUB_WORKSPACE/$DIY_P1_SH
 
     - name: Configuration Customization
       run: |
