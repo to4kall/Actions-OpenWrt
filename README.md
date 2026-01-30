@@ -16,17 +16,14 @@ kmod-rtw88-8814au
 kmod-rtw88-8821a
 kmod-rtw88-8821au
 kmod-rtw88-8821c
-kmod-rtw88-8821cu
+kmod-rtw88-8821cu和rtl88121cu通用
 kmod-rtw88-8822b
 kmod-rtw88-8822bu
 kmod-rtw88-8822c
 kmod-rtw88-8822cs
-kmod-rtw88-8822cu
+kmod-rtw88-8822cu和rtl8812cu通用
 kmod-rtl8188eu
 
-目前开启的爱科微 aic系列网卡
-kmod-aic8800-sdio
-kmod-aic8800-usb
 
 需要其他插件自行通过config_small配置添加，注意同时开启对应依赖选项
 
